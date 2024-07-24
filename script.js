@@ -1,3 +1,23 @@
+const imagesToPreload = [
+    'images/torontoboy1.png',
+    'images/torontogirl1.png',
+    'images/atlantaboy1.png',
+    'images/atlantagirl1.png',
+    'images/houstonboy1.png',
+    'images/houstongirl1.png',
+    'images/kid1.png',
+    'images/ozempic.png',
+    'images/drake.png',
+    'images/kendrick.png',
+    'images/logo.png',
+    'images/van.gif'
+];
+
+imagesToPreload.forEach(src => {
+    const img = new Image();
+    img.src = src;
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const intro = document.getElementById('intro');
     const game = document.getElementById('game');
