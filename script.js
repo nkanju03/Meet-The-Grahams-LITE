@@ -22,10 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
     let kidsInterval;
     let currentLocation = '';
     let currentMessageIndex = 0;
+    let gameActive = false;
 
     const messages = [
-        "Damn! Drake can't keep track of all his kids...",
-        "We're going to have to go to all of his favorite places if we want to Meet the Grahams...",
+        "Damn! Drake can't keep track of all his kids.",
+        "We're going to have to go to all of his favorite places if we want to Meet the Grahams.",
         "Can you help us? Select which location you want to start with."
     ];
 
@@ -90,12 +91,14 @@ document.addEventListener('DOMContentLoaded', () => {
         currentMessageIndex = 0;
         dialogueText.textContent = messages[currentMessageIndex];
         nextButton.disabled = false;
+        gameActive = false;
     }
 
     function showCredits() {
         intro.style.display = 'none';
         game.style.display = 'none';
         creditsPage.style.display = 'block';
+        gameActive = false;
     }
 
     function startGame(location) {
@@ -109,6 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTime();
         gameInterval = setInterval(countdown, 1000);
         kidsInterval = setInterval(spawnKidOrDistraction, 1000);
+        gameActive = true;
     }
 
     function countdown() {
@@ -130,6 +134,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function spawnKidOrDistraction() {
+        if (!gameActive) return;
+
         const isDistraction = Math.random() < 0.2; // 20% chance to spawn a distraction
 
         const item = document.createElement('img');
@@ -142,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
         item.style.left = `${Math.random() * (gameArea.clientWidth - 50)}px`;
 
         item.addEventListener('click', () => {
+            if (!gameActive) return;
             if (isDistraction) {
                 score = Math.max(0, score - 5);
                 wrongSound.play();
@@ -165,6 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function endGame() {
         clearInterval(gameInterval);
         clearInterval(kidsInterval);
+        gameActive = false;
         if (score > highScore) {
             highScore = score;
         }
