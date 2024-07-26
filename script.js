@@ -45,8 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let gameActive = false;
 
     const messages = [
-        "Damn! Drake can't keep track of all his kids.",
-        "We're going to have to go to all of his favorite places if we want to Meet the Grahams.",
+        "Damn! Drake can't keep track of all his kids...",
+        "We're going to have to go to all of his favorite places if we want to Meet the Grahams...",
         "Can you help us? Select which location you want to start with."
     ];
 
